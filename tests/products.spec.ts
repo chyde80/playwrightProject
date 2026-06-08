@@ -109,3 +109,25 @@ test.describe('Products Page Tests', () => {
     expect(prices).toEqual(sortedPrices);
   });
 });
+
+// Problem-user specific visual checks — run only when TEST_USER=problem_user
+const problemUserTest = isProblemUser ? test : test.skip;
+
+problemUserTest('should show broken product images for problem_user', async ({ page }) => {
+  const loginPage = new LoginPage(page);
+
+  await loginPage.navigate();
+  await loginPage.login(CURRENT_USER.username, CURRENT_USER.password);
+  await expect(page).toHaveURL(/inventory/);
+
+  const brokenImages = await page.$$eval('.inventory_item_img img', (imgs) =>
+    imgs
+      .filter((img) => img.getAttribute('src')?.includes('sl-404'))
+      .map((img) => img.getAttribute('src')),
+  );
+
+  expect(brokenImages.length).toBeGreaterThan(0);
+  expect(brokenImages.length).toBe(
+    await page.$$eval('.inventory_item_img img', (imgs) => imgs.length),
+  );
+});
