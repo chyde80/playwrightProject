@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from '../src/pages/LoginPage';
 import { ProductsPage } from '../src/pages/ProductsPage';
 import { PRODUCTS } from '../src/fixtures/testData';
-import { CURRENT_USER } from '../src/fixtures/currentUser';
+import { CURRENT_USER, isProblemUser } from '../src/fixtures/currentUser';
 
 test.describe('Products Page Tests', () => {
   let loginPage: LoginPage;
@@ -105,7 +105,9 @@ test.describe('Products Page Tests', () => {
   });
 });
 
-test('should show broken product images for problem_user', async ({ page }) => {
+const problemUserTest = isProblemUser ? test : test.skip;
+
+problemUserTest('should show broken product images for problem_user', async ({ page }) => {
   const loginPage = new LoginPage(page);
 
   await loginPage.navigate();
