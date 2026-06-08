@@ -52,7 +52,7 @@ jobs:
 
       - name: Deploy Playwright report to GitHub Pages
         if: always()
-        uses: actions/deploy-pages@latest
+        uses: actions/deploy-pages@v5.0.0
 
       - name: Publish Playwright report link
         if: always()
