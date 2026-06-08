@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../src/pages/LoginPage';
 import { TEST_USERS } from '../src/fixtures/testData';
-import { CURRENT_USER, isLockedOutUser } from '../src/fixtures/currentUser';
+import { CURRENT_USER } from '../src/fixtures/currentUser';
 
 test.describe('Login Page Tests', () => {
   let loginPage: LoginPage;
@@ -18,8 +18,6 @@ test.describe('Login Page Tests', () => {
   });
 
   test('should successfully login with valid credentials', async ({ page }) => {
-    test.skip(isLockedOutUser, 'locked_out_user cannot successfully login');
-
     await loginPage.login(CURRENT_USER.username, CURRENT_USER.password);
     await expect(page).toHaveURL(/inventory/);
     await expect(page.locator('.inventory_list')).toBeVisible();

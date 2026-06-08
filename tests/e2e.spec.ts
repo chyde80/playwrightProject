@@ -4,16 +4,9 @@ import { ProductsPage } from '../src/pages/ProductsPage';
 import { CartPage } from '../src/pages/CartPage';
 import { CheckoutPage } from '../src/pages/CheckoutPage';
 import { TEST_DATA, PRODUCTS } from '../src/fixtures/testData';
-import { CURRENT_USER, isProblemUser, isLockedOutUser } from '../src/fixtures/currentUser';
+import { CURRENT_USER } from '../src/fixtures/currentUser';
 
 test.describe('E2E - Complete Purchase Flow', () => {
-  test.beforeEach(() => {
-    test.skip(
-      isProblemUser || isLockedOutUser,
-      'General E2E tests are only applicable for standard_user and performance_glitch_user',
-    );
-  });
-
   test('should complete a full purchase from login to order confirmation', async ({ page }) => {
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);

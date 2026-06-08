@@ -3,7 +3,7 @@ import { LoginPage } from '../src/pages/LoginPage';
 import { ProductsPage } from '../src/pages/ProductsPage';
 import { CartPage } from '../src/pages/CartPage';
 import { PRODUCTS } from '../src/fixtures/testData';
-import { CURRENT_USER, isProblemUser, isLockedOutUser } from '../src/fixtures/currentUser';
+import { CURRENT_USER } from '../src/fixtures/currentUser';
 
 test.describe('Cart Page Tests', () => {
   let loginPage: LoginPage;
@@ -11,11 +11,6 @@ test.describe('Cart Page Tests', () => {
   let cartPage: CartPage;
 
   test.beforeEach(async ({ page }) => {
-    test.skip(
-      isProblemUser || isLockedOutUser,
-      'General cart tests are only applicable for standard_user and performance_glitch_user',
-    );
-
     loginPage = new LoginPage(page);
     productsPage = new ProductsPage(page);
     cartPage = new CartPage(page);

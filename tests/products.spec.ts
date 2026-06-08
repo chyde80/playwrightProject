@@ -2,18 +2,13 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from '../src/pages/LoginPage';
 import { ProductsPage } from '../src/pages/ProductsPage';
 import { PRODUCTS } from '../src/fixtures/testData';
-import { CURRENT_USER, isProblemUser, isLockedOutUser } from '../src/fixtures/currentUser';
+import { CURRENT_USER } from '../src/fixtures/currentUser';
 
 test.describe('Products Page Tests', () => {
   let loginPage: LoginPage;
   let productsPage: ProductsPage;
 
   test.beforeEach(async ({ page }) => {
-    test.skip(
-      isProblemUser || isLockedOutUser,
-      'General product tests are only applicable for standard_user and performance_glitch_user',
-    );
-
     loginPage = new LoginPage(page);
     productsPage = new ProductsPage(page);
 
@@ -110,10 +105,7 @@ test.describe('Products Page Tests', () => {
   });
 });
 
-// Problem-user specific visual checks — run only when TEST_USER=problem_user
-const problemUserTest = isProblemUser ? test : test.skip;
-
-problemUserTest('should show broken product images for problem_user', async ({ page }) => {
+test('should show broken product images for problem_user', async ({ page }) => {
   const loginPage = new LoginPage(page);
 
   await loginPage.navigate();
