@@ -31,4 +31,15 @@ jobs:
       - name: Lint
         run: npm run lint
       - name: Run Playwright tests
-        run: npx playwright test --reporter=github
+        run: npx playwright test --reporter=github,html
+      - name: Upload Playwright report artifact
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-report
+          path: playwright-report
+      - name: Publish Playwright report link
+        if: always()
+        run: |
+          echo "## Playwright report" >> $GITHUB_STEP_SUMMARY
+          echo "[Open Playwright report artifact](https://github.com/${{ github.repository }}/suites/${{ github.run_id }}/artifacts)" >> $GITHUB_STEP_SUMMARY
