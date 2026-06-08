@@ -26,15 +26,15 @@
   "devDependencies": {
     "@playwright/test": "^1.60.0",
     "@types/node": "^25.9.2",
-    "playwright": "^1.60.0",
-    "typescript": "^6.0.3",
-    "eslint": "*",
-    "@typescript-eslint/parser": "*",
     "@typescript-eslint/eslint-plugin": "*",
+    "@typescript-eslint/parser": "*",
+    "eslint": "*",
     "eslint-config-prettier": "*",
-    "eslint-plugin-prettier": "*",
-    "prettier": "*",
     "eslint-plugin-playwright": "*",
-    "rimraf": "*"
+    "eslint-plugin-prettier": "*",
+    "playwright": "^1.60.0",
+    "prettier": "*",
+    "rimraf": "*",
+    "typescript": "^6.0.3"
   }
 }
