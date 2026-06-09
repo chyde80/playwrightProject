@@ -43,19 +43,3 @@ jobs:
         with:
           name: playwright-report
           path: playwright-report
-
-      - name: Upload Playwright report for Pages
-        if: always()
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: playwright-report
-
-      - name: Deploy Playwright report to GitHub Pages
-        if: always()
-        uses: actions/deploy-pages@v5
-
-      - name: Publish Playwright report link
-        if: always()
-        run: |
-          echo "## Playwright report" >> $GITHUB_STEP_SUMMARY
-          echo "[Open Playwright report (GitHub Pages)](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }})" >> $GITHUB_STEP_SUMMARY
